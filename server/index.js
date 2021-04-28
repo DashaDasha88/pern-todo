@@ -14,7 +14,7 @@ app.post("/todos", async (req, res) => {
   try {
     const { description } = req.body;
     const newTodo = await pool.query(
-      "INSERT INTO todo_id (description) VALUES($1) RETURNING *",
+      "INSERT INTO todo (description) VALUES($1) RETURNING *",
       [description]
     );
 
@@ -52,7 +52,7 @@ app.put("/todos/:id", async (req, res) => {
     const { description } = req.body;
     const updateTodo = await pool.query("UPDATE todo SET description = $1 WHERE todo_id = $2"
     [description, id]
-    )
+    );
 
   } catch (err) {
     console.error(err.message);
